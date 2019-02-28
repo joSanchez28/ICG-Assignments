@@ -1,0 +1,13 @@
+﻿  Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/Assignment 0 - Raytracing-HelloWorld/assignment_0/src/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/jorge/Documents/GitHub/ICG-Projects/Assignment 0 - Raytracing-HelloWorld/assignment_0/cmake_build/src/CMakeFiles/generate.stamp is up-to-date.
+cl : Línea de comandos warning D9002: se omite la opción desconocida '/arch:SSE'
+  raytrace.cpp
+  Cylinder.cpp
+  Image.cpp
+  Mesh.cpp
+  Plane.cpp
+  Scene.cpp
+  Sphere.cpp
+  vec3.cpp
+  Generando código...
+  raytrace.vcxproj -> C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\cmake_build\Debug\raytrace.exe

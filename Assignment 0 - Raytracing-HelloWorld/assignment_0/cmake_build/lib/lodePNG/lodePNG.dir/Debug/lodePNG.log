@@ -1,0 +1,15 @@
+﻿  Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/Assignment 0 - Raytracing-HelloWorld/assignment_0/lib/lodePNG/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/jorge/Documents/GitHub/ICG-Projects/Assignment 0 - Raytracing-HelloWorld/assignment_0/cmake_build/lib/lodePNG/CMakeFiles/generate.stamp is up-to-date.
+cl : Línea de comandos warning D9002: se omite la opción desconocida '/arch:SSE'
+  lodepng.cpp
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(773): warning C4334: '<<': el resultado del desplazamiento de 32 bits se convirtió implícitamente en 64 bits (¿quería un desplazamiento de 64 bits?)
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(1437): warning C4267: '=': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(1441): warning C4267: '=': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(1513): warning C4267: '=': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(3445): warning C4334: '<<': el resultado del desplazamiento de 32 bits se convirtió implícitamente en 64 bits (¿quería un desplazamiento de 64 bits?)
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(3458): warning C4267: 'argumento': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(4261): warning C4267: '=': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(4309): warning C4267: '=': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(4389): warning C4267: '=': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\lib\lodePNG\lodepng.cpp(5329): warning C4267: 'inicializando': conversión de 'size_t' a 'unsigned int'; posible pérdida de datos
+  lodePNG.vcxproj -> C:\Users\jorge\Documents\GitHub\ICG-Projects\Assignment 0 - Raytracing-HelloWorld\assignment_0\cmake_build\lib\lodePNG\Debug\lodePNG.lib
