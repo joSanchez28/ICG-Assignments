@@ -51,7 +51,6 @@ intersect(const Ray&  _ray,
     
     _intersection_t = NO_INTERSECTION;
     for (size_t i = 0; i < 2; ++i) {
-        //dec = n1*n1+2*n1*n2*t[i]+n2*n2*t[i]*t[i];
         dec = dot(_ray.origin+t[i]*dir-center, axis);
         //t>0 and accomplish height of the cylinder
         if (t[i] > 0 && ((dec<height/2 && dec>=0) || (-dec<=height/2 && dec<=0))){
@@ -65,9 +64,9 @@ intersect(const Ray&  _ray,
 
     if(_intersection_t != NO_INTERSECTION){
         _intersection_point = _ray.origin+_intersection_t*dir;
-        _intersection_normal = (_intersection_point - center) / distance(_intersection_point, center);
-        //equals to _intersection_normal = (_intersection_point - center) / sqrt(radius*radius+findec*findec) by geometry;
-        
+        //_intersection_normal = (_intersection_point - (center+axis*findec)) / distance(_intersection_point, center+axis*findec);
+        _intersection_normal = (_intersection_point - (center+axis*findec)) / radius;
+
         return true;
     }
     else{
