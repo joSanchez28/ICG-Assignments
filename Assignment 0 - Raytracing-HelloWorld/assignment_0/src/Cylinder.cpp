@@ -63,9 +63,17 @@ intersect(const Ray&  _ray,
 
 
     if(_intersection_t != NO_INTERSECTION){
-        _intersection_point = _ray.origin+_intersection_t*dir;
+        //_intersection_point = _ray.origin+_intersection_t*dir;
+        _intersection_point  = _ray(_intersection_t);
+              
+        if(distance(_ray.origin, center+axis*findec) > distance(_ray.origin, _intersection_point)){
+            _intersection_normal = (_intersection_point - (center+axis*findec)) / radius;
+        }
+        else{
+            _intersection_normal = -(_intersection_point - (center+axis*findec)) / radius;       
+        }
         //_intersection_normal = (_intersection_point - (center+axis*findec)) / distance(_intersection_point, center+axis*findec);
-        _intersection_normal = (_intersection_point - (center+axis*findec)) / radius;
+        //_intersection_normal = (_intersection_point - (center+axis*findec)) / radius;
 
         return true;
     }
