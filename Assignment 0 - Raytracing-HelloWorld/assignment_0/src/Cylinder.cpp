@@ -25,33 +25,52 @@ intersect(const Ray&  _ray,
           vec3&       _intersection_normal,
           double&     _intersection_t) const
 {
-	/** \todo
-	 * - compute the first valid intersection `_ray` with the cylinder
-	 *   (valid means in front of the viewer: t > 0)
-	 * - store intersection point in `_intersection_point`
-	 * - store ray parameter in `_intersection_t`
-	 * - store normal at _intersection_point in `_intersection_normal`.
-	 * - return whether there is an intersection with t > 0
-	*/
+    /** \todo
+     * - compute the first valid intersection `_ray` with the cylinder
+     *   (valid means in front of the viewer: t > 0)
+     * - store intersection point in `_intersection_point`
+     * - store ray parameter in `_intersection_t`
+     * - store normal at _intersection_point in `_intersection_normal`.
+     * - return whether there is an intersection with t > 0
+    */
 
-	const vec3 &dir = _ray.direction;
-	const vec3   oc = _ray.origin - center;
+    const vec3 &dir = _ray.direction;
+    const vec3   oc = _ray.origin - center;
 
-	std::array<double, 2> t;
-	size_t nsol = solveQuadratic(dot(dir, dir),
-		2 * dot(dir, oc),
-		dot(oc, oc) - radius * radius, t);
+    double n1 = dot(oc, axis);
+    double n2 = dot(dir, axis);
 
-	_intersection_t = NO_INTERSECTION;
+    double dec = 0;
+    double findec = 0;
 
-	// Find the closest valid solution (in front of the viewer)
-	for (size_t i = 0; i < nsol; ++i) {
-		if (t[i] > 0) _intersection_t = std::min(_intersection_t, t[i]);
-	}
+    std::array<double, 2> t;
+    // Solving for an infinite height cylinder
+    size_t nsol = solveQuadratic(dot(dir, dir) - n2*n2,
+                                 2 * (dot(dir, oc) - n1*n2),
+                                 dot(oc, oc) - n1*n1 - radius * radius, t);
+    
+    _intersection_t = NO_INTERSECTION;
+    for (size_t i = 0; i < 2; ++i) {
+        //dec = n1*n1+2*n1*n2*t[i]+n2*n2*t[i]*t[i];
+        dec = dot(_ray.origin+t[i]*dir-center, axis);
+        //t>0 and accomplish height of the cylinder
+        if (t[i] > 0 && ((dec<height/2 && dec>=0) || (-dec<=height/2 && dec<=0))){
+            _intersection_t = std::min(_intersection_t, t[i]);
+            if(_intersection_t==t[i]){
+                findec = dec;
+            }
+        }
+    }
 
-	if (_intersection_t == NO_INTERSECTION) return false;
 
-	_intersection_point = _ray(_intersection_t);
-	_intersection_normal = (_intersection_point - center) / radius;
-    return false;
+    if(_intersection_t != NO_INTERSECTION){
+        _intersection_point = _ray.origin+_intersection_t*dir;
+        _intersection_normal = (_intersection_point - center) / distance(_intersection_point, center);
+        //equals to _intersection_normal = (_intersection_point - center) / sqrt(radius*radius+findec*findec) by geometry;
+        
+        return true;
+    }
+    else{
+        return false;
+    }
 }
