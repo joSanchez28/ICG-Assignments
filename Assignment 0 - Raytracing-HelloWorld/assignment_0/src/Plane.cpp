@@ -26,7 +26,8 @@ Plane::Plane(const vec3& _center, const vec3& _normal)
 
 
 //-----------------------------------------------------------------------------
-
+/*
+// Jorge:
 
 bool
 Plane::
@@ -35,12 +36,12 @@ intersect(const Ray& _ray,
           vec3&      _intersection_normal,
           double&    _intersection_t ) const
 {
-	/** \todo
-	 * - compute the intersection of the plane with `_ray`
-	 * - if ray and plane are parallel there is no intersection
-	 * - otherwise compute intersection data and store it in `_intersection_point`, `_intersection_normal`, and `_intersection_t`.
-	 * - return whether there is an intersection in front of the viewer (t > 0)
-	*/
+	// /** \todo
+	// * - compute the intersection of the plane with `_ray`
+	// * - if ray and plane are parallel there is no intersection
+	// * - otherwise compute intersection data and store it in `_intersection_point`, `_intersection_normal`, and `_intersection_t`.
+	// * - return whether there is an intersection in front of the viewer (t > 0)
+	//
 	bool intersection = false;
 
 	//Are ray and  plane parallel? If yes; then there is no intersection by indications.
@@ -57,6 +58,47 @@ intersect(const Ray& _ray,
 
     return intersection;
 }
+*/
+// Carlos:
+
+bool
+Plane::
+intersect(const Ray& _ray,
+          vec3&      _intersection_point,
+          vec3&      _intersection_normal,
+          double&    _intersection_t ) const
+{
+    /** \todo
+     * - compute the intersection of the plane with `_ray`
+     * - if ray and plane are parallel there is no intersection
+     * - otherwise compute intersection data and store it in `_intersection_point`, `_intersection_normal`, and `_intersection_t`.
+     * - return whether there is an intersection in front of the viewer (t > 0)
+    */
+
+    // We have to define a method for the plane, which intersects it with the ray.
+    
+    const vec3 &dir = _ray.direction;
+    const vec3   co = center-_ray.origin;
+
+    double t=-1.0;
+    _intersection_t = NO_INTERSECTION;
+
+    if(dot(normal, dir)!=0){ // ray // plane (cos(90º) = 0) no intersection (denominator equals to 0)
+        t = dot(normal, co)/dot(normal, dir);
+        _intersection_t = t;
+        _intersection_point = _ray.origin+t*dir;
+        _intersection_normal = normal;
+    }
+    
+    if(t>0){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
 
 
 //=============================================================================
