@@ -44,12 +44,14 @@ intersect(const Ray&  _ray,
     double findec = 0;
 
     std::array<double, 2> t;
+          
     // Solving for an infinite height cylinder
     size_t nsol = solveQuadratic(dot(dir, dir) - n2*n2,
                                  2 * (dot(dir, oc) - n1*n2),
                                  dot(oc, oc) - n1*n1 - radius * radius, t);
     
     _intersection_t = NO_INTERSECTION;
+    // Get closest and front intersection point with the finite cylinder. Save the amount in the axis direction (findec) for later usage.
     for (size_t i = 0; i < 2; ++i) {
         dec = dot(_ray.origin+t[i]*dir-center, axis);
         //t>0 and accomplish height of the cylinder
@@ -65,15 +67,13 @@ intersect(const Ray&  _ray,
     if(_intersection_t != NO_INTERSECTION){
         //_intersection_point = _ray.origin+_intersection_t*dir;
         _intersection_point  = _ray(_intersection_t);
-              
+        // Normal vector pointing towards the viewer (normal and view ray direction pointing in opposite directions)
         if(distance(_ray.origin, center+axis*findec) > distance(_ray.origin, _intersection_point)){
             _intersection_normal = (_intersection_point - (center+axis*findec)) / radius;
         }
         else{
             _intersection_normal = -(_intersection_point - (center+axis*findec)) / radius;       
         }
-        //_intersection_normal = (_intersection_point - (center+axis*findec)) / distance(_intersection_point, center+axis*findec);
-        //_intersection_normal = (_intersection_point - (center+axis*findec)) / radius;
 
         return true;
     }
