@@ -181,6 +181,27 @@ vec3 Scene::lighting(const vec3& _point, const vec3& _normal, const vec3& _view,
 
     color = color + specular;
     return color;
+    
+    /*
+    vec3 color =  ambience * _material.ambient;
+	for (int i = 0; i < lights.size(); i++) {
+		vec3 l = normalize(lights[i].position - _point);
+		double n_l = dot(_normal, l);
+		if (n_l > 0) {
+			color += lights[i].color * (_material.diffuse * (n_l));
+
+			vec3 r = (2 * _normal)* n_l - l;
+			double r_v = dot(r, _view);
+
+			if (r_v > 0) {
+				color += lights[i].color * _material.specular * std::pow((r_v), _material.shininess);
+			}
+		}
+	}
+
+    return color;
+}
+    */
 }
 
 //-----------------------------------------------------------------------------
