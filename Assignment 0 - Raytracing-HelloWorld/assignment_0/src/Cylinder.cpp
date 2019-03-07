@@ -31,7 +31,7 @@ intersect(const Ray&  _ray,
      * - store intersection point in `_intersection_point`
      * - store ray parameter in `_intersection_t`
      * - store normal at _intersection_point in `_intersection_normal`.
-     * - return whether there is an intersection with t > 0
+     * - return whether there is an intersection sfkjgbkj\nwith t > 0
     */
 
     const vec3 &dir = _ray.direction;
