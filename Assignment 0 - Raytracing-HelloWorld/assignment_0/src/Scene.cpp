@@ -20,7 +20,7 @@
 #include <map>
 #include <functional>
 #include <stdexcept>
-
+#include <cmath>
 #if HAS_TBB
 #include <tbb/tbb.h>
 #include <tbb/parallel_for.h>
@@ -94,6 +94,14 @@ vec3 Scene::trace(const Ray& _ray, int _depth)
     vec3 color = lighting(point, normal, -_ray.direction, object->material);
 
 
+    /** \todo
+     * Compute reflections by recursive ray tracing:
+     * - check whether `object` is reflective by checking its `material.mirror`
+     * - check recursion depth
+     * - generate reflected ray, compute its color contribution, and mix it with
+     * the color computed by local Phong lighting (use `object->material.mirror` as weight)
+     * - check whether your recursive algorithm reflects the ray `max_depth` times
+     */
 
     return color;
 }
@@ -126,9 +134,52 @@ bool Scene::intersect(const Ray& _ray, Object_ptr& _object, vec3& _point, vec3& 
 vec3 Scene::lighting(const vec3& _point, const vec3& _normal, const vec3& _view, const Material& _material)
 {
 
+     /** \todo
+     * Compute the Phong lighting:
+     * - start with global ambient contribution
+     * - for each light source (stored in vector `lights`) add diffuse and specular contribution
+     * - only add diffuse and specular light if object is not in shadow
+     *
+     * You can look at the classes `Light` and `Material` to check their attributes. Feel free to use
+     * the existing vector functions in vec3.h e.g. mirror, reflect, norm, dot, normalize
+     */
+
     // visualize the normal as a RGB color for now.
     vec3 color = (_normal + vec3(1)) / 2.0;
 
+    // Ambient contribution
+    color = _material.ambient*ambience;
+
+    // Difusse contribution
+    vec3 dispersse = {0,0,0};
+    vec3 l = {0,0,0};
+    double nl = 0;
+    for(int i=0; i<lights.size(); i++){
+        l = (-_point+lights[i].position)/distance(_point, lights[i].position);
+        nl = dot(_normal, l);
+        if(nl>0){
+            dispersse = dispersse + lights[i].color * (_material.diffuse*nl);
+        }
+    }
+    color = color + dispersse;
+
+    // Specular contribution
+    vec3 specular = {0,0,0};
+    vec3 r = {0,0,0};
+    vec3 s = {0,0,0};
+    double rv = 0;
+    for( int j=0; j<lights.size(); j++){
+        l = (-_point+lights[j].position)/distance(_point, lights[j].position);
+        nl = dot(_normal, l);
+        s = -l + _normal*nl;
+        r = (l + 2*s);
+        rv = dot(r, _view);
+        if(nl>0 && rv>0){
+            specular = specular + lights[j].color * _material.specular * std::pow(rv, _material.shininess);
+        }
+    }
+
+    color = color + specular;
     return color;
 }
 
