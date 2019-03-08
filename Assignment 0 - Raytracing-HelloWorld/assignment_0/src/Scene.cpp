@@ -40,7 +40,7 @@ Image Scene::render()
             Ray ray = camera.primary_ray(x,y);
 
             // compute color by tracing this ray
-            vec3 color = trace(ray, 5);
+            vec3 color = trace(ray, 0);
 
             // avoid over-saturation
             color = min(color, vec3(1, 1, 1));
@@ -102,14 +102,14 @@ vec3 Scene::trace(const Ray& _ray, int _depth)
      * the color computed by local Phong lighting (use `object->material.mirror` as weight)
      * - check whether your recursive algorithm reflects the ray `max_depth` times
      */
-    
+
     // Declare the variable for the reflected ray (to not having to compute it 2 times later)
     vec3 reflectv;
     // Comprobations
-    if((*object).material.mirror>0.0 && _depth>0){
+    if((*object).material.mirror>0.0 && _depth<=max_depth){
         reflectv = reflect(_ray.direction, normal);
         // Implementation of the expression for reflections
-        color = (1-(*object).material.mirror) * color + (*object).material.mirror*trace(Ray(point+reflectv*0.00001, reflectv), _depth-1);
+        color = (1-(*object).material.mirror) * color + (*object).material.mirror*trace(Ray(point+reflectv*0.00001, reflectv), _depth+1);
     }
     return color;
 }
