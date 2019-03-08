@@ -86,7 +86,7 @@ private:
     std::vector<std::unique_ptr<Object>> objects;
 
     /// max recursion depth for mirroring
-    int max_depth = 0;
+    int max_depth = 10;
 
     /// background color
     vec3 background = vec3(0, 0, 0);
