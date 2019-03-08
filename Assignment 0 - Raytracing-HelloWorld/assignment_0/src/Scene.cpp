@@ -40,7 +40,7 @@ Image Scene::render()
             Ray ray = camera.primary_ray(x,y);
 
             // compute color by tracing this ray
-            vec3 color = trace(ray, 0);
+            vec3 color = trace(ray, 5);
 
             // avoid over-saturation
             color = min(color, vec3(1, 1, 1));
@@ -145,63 +145,37 @@ vec3 Scene::lighting(const vec3& _point, const vec3& _normal, const vec3& _view,
      */
 
     // visualize the normal as a RGB color for now.
-    vec3 color = (_normal + vec3(1)) / 2.0;
+    //vec3 color = (_normal + vec3(1)) / 2.0;
 
-    // Ambient contribution
-    color = _material.ambient*ambience;
-
-    // Difusse contribution
-    vec3 dispersse = {0,0,0};
-    vec3 l = {0,0,0};
-    double nl = 0;
-    for(int i=0; i<lights.size(); i++){
-        l = (-_point+lights[i].position)/distance(_point, lights[i].position);
-        nl = dot(_normal, l);
-        if(nl>0){
-            dispersse = dispersse + lights[i].color * (_material.diffuse*nl);
-        }
-    }
-    color = color + dispersse;
-
-    // Specular contribution
-    vec3 specular = {0,0,0};
-    vec3 r = {0,0,0};
-    vec3 s = {0,0,0};
-    double rv = 0;
-    for( int j=0; j<lights.size(); j++){
-        l = (-_point+lights[j].position)/distance(_point, lights[j].position);
-        nl = dot(_normal, l);
-        s = -l + _normal*nl;
-        r = (l + 2*s);
-        rv = dot(r, _view);
-        if(nl>0 && rv>0){
-            specular = specular + lights[j].color * _material.specular * std::pow(rv, _material.shininess);
-        }
-    }
-
-    color = color + specular;
-    return color;
-    
-    /*
-    vec3 color =  ambience * _material.ambient;
+	vec3 color =  ambience * _material.ambient;
 	for (int i = 0; i < lights.size(); i++) {
 		vec3 l = normalize(lights[i].position - _point);
 		double n_l = dot(_normal, l);
-		if (n_l > 0) {
+
+		//Are there shadows? (There are shadows if there is an object blocking the ray between the point and a light.
+		bool light_blocked = false;
+		Ray ray_from_light = Ray(_point + l * 0.000001, l); //Add l*0.00001 in order to correct the shadows error
+		vec3 first_ray_intersection;
+		vec3 normal_inters;
+		Object_ptr object_intersected;
+		double t;
+		light_blocked = intersect(ray_from_light , object_intersected, first_ray_intersection, normal_inters, t);
+		//We also check if the object is between the light and the _point (otherwise it is behind the light).
+		light_blocked = light_blocked && (distance(_point, first_ray_intersection) < distance(_point, lights[i].position));
+
+		//We use the deducted formulas of the lectures in order to add the diffuse and the specular lights.
+		if (!light_blocked && n_l > 0) {
+			//Add diffuse
 			color += lights[i].color * (_material.diffuse * (n_l));
 
 			vec3 r = (2 * _normal)* n_l - l;
 			double r_v = dot(r, _view);
 
 			if (r_v > 0) {
+				//Add specular
 				color += lights[i].color * _material.specular * std::pow((r_v), _material.shininess);
 			}
 		}
-	}
-
-    return color;
-}
-    */
 }
 
 //-----------------------------------------------------------------------------
