@@ -20,7 +20,9 @@
 #include <map>
 #include <functional>
 #include <stdexcept>
+
 #include <cmath>
+
 #if HAS_TBB
 #include <tbb/tbb.h>
 #include <tbb/parallel_for.h>
@@ -47,6 +49,7 @@ Image Scene::render()
 
             // store pixel color
             img(x,y) = color;
+
         }
     };
 
@@ -85,6 +88,7 @@ vec3 Scene::trace(const Ray& _ray, int _depth)
     vec3        point;
     vec3        normal;
     double      t;
+	
     if (!intersect(_ray, object, point, normal, t))
     {
         return background;
@@ -102,15 +106,13 @@ vec3 Scene::trace(const Ray& _ray, int _depth)
      * the color computed by local Phong lighting (use `object->material.mirror` as weight)
      * - check whether your recursive algorithm reflects the ray `max_depth` times
      */
-
-    // Declare the variable for the reflected ray (to not having to compute it 2 times later)
-    vec3 reflectv;
-    // Comprobations
-    if((*object).material.mirror>0.0 && _depth<=max_depth){
-        reflectv = reflect(_ray.direction, normal);
-        // Implementation of the expression for reflections
-        color = (1-(*object).material.mirror) * color + (*object).material.mirror*trace(Ray(point+reflectv*0.00001, reflectv), _depth+1);
-    }
+	
+	double alpha = object->material.mirror;
+	if (alpha > 0) {
+		vec3 ref = reflect(_ray.direction, normal);
+		color = (1 - alpha) * color + alpha * trace(Ray(point + ref * 0.00001, ref), _depth+1);
+	}
+	
     return color;
 }
 
@@ -171,19 +173,19 @@ vec3 Scene::lighting(const vec3& _point, const vec3& _normal, const vec3& _view,
 		//We also check if the object is between the light and the _point (otherwise it is behind the light).
 		light_blocked = light_blocked && (distance(_point, first_ray_intersection) < distance(_point, lights[i].position));
 
-		//We use the deducted formulas of the lectures in order to add the diffuse and the specular lights.
 		if (!light_blocked && n_l > 0) {
-			//Add diffuse
 			color += lights[i].color * (_material.diffuse * (n_l));
 
 			vec3 r = (2 * _normal)* n_l - l;
 			double r_v = dot(r, _view);
 
 			if (r_v > 0) {
-				//Add specular
 				color += lights[i].color * _material.specular * std::pow((r_v), _material.shininess);
 			}
 		}
+	}
+
+    return color;
 }
 
 //-----------------------------------------------------------------------------
