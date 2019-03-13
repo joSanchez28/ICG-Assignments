@@ -21,7 +21,7 @@
 #include <functional>
 #include <stdexcept>
 
-#include <cmath>
+#include <cmath> // to use power function
 
 #if HAS_TBB
 #include <tbb/tbb.h>
@@ -107,13 +107,16 @@ vec3 Scene::trace(const Ray& _ray, int _depth)
      * - check whether your recursive algorithm reflects the ray `max_depth` times
      */
 	
+	// check whether object is reflective where 0 = no reflection
 	double alpha = object->material.mirror;
-	if (alpha > 0) {
-		vec3 ref = reflect(_ray.direction, normal);
-		color = (1 - alpha) * color + alpha * trace(Ray(point + ref * 0.00001, ref), _depth+1);
+	if (alpha > 0){
+		vec3 ref = reflect(_ray.direction, normal); // generate reflected ray
+		vec3 reflected_color = trace(Ray(point + ref * 0.00001, ref), _depth); // compute color contribution where small displacement used to correct precision errors
+		color = (1 - alpha) * color + alpha * reflected_color; // mix with color from Phong lighting
 	}
+
+	return color;
 	
-    return color;
 }
 
 //-----------------------------------------------------------------------------
@@ -153,39 +156,52 @@ vec3 Scene::lighting(const vec3& _point, const vec3& _normal, const vec3& _view,
      * You can look at the classes `Light` and `Material` to check their attributes. Feel free to use
      * the existing vector functions in vec3.h e.g. mirror, reflect, norm, dot, normalize
      */
+	
+	// AMBIENT
+	// compute ambient term and store in color
+	vec3 color = ambience * _material.ambient;
 
-    // visualize the normal as a RGB color for now.
-    //vec3 color = (_normal + vec3(1)) / 2.0;
-
-	vec3 color =  ambience * _material.ambient;
+	// for loop used to compute each light and will sum all of them 
 	for (int i = 0; i < lights.size(); i++) {
+
+		// define vectors l and r in Phong eqn as stated in lecture and compute dot prods
 		vec3 l = normalize(lights[i].position - _point);
 		double n_l = dot(_normal, l);
+		vec3 r = 2 * _normal * n_l - l; 
+		double r_v = dot(r, _view);
 
-		//Are there shadows? (There are shadows if there is an object blocking the ray between the point and a light.
-		bool light_blocked = false;
-		Ray ray_from_light = Ray(_point + l * 0.000001, l); //Add l*0.00001 in order to correct the shadows error
-		vec3 first_ray_intersection;
-		vec3 normal_inters;
-		Object_ptr object_intersected;
+		// SHADOWS
+		// generate shadow ray 
+		Ray s_ray = Ray(_point + l * 0.000001, l); // displace ray origin by l*0.000001 term to correct self-shadowing
+		// use intersection function to determine whether the light is blocked
+		vec3 ray_int, norm_int;
+		Object_ptr obj_int;
 		double t;
-		light_blocked = intersect(ray_from_light , object_intersected, first_ray_intersection, normal_inters, t);
-		//We also check if the object is between the light and the _point (otherwise it is behind the light).
-		light_blocked = light_blocked && (distance(_point, first_ray_intersection) < distance(_point, lights[i].position));
+		bool light_blocked = intersect(s_ray, obj_int, ray_int, norm_int, t);
 
+		// terms for where light is blocked will not be computed in following code
+
+		// DIFFUSE
+		// only illumination when n_l > 0 therefore only compute those
 		if (!light_blocked && n_l > 0) {
-			color += lights[i].color * (_material.diffuse * (n_l));
-
-			vec3 r = (2 * _normal)* n_l - l;
-			double r_v = dot(r, _view);
-
-			if (r_v > 0) {
-				color += lights[i].color * _material.specular * std::pow((r_v), _material.shininess);
-			}
+			// compute diffuse term and add contribution to color
+			color += lights[i].color * _material.diffuse * n_l;
 		}
+
+		// SPECULAR
+		// only illumination when r_v > 0 therefore only compute those
+		if (!light_blocked && r_v > 0) {
+			// compute specular term and add contribution to color
+			color += lights[i].color * _material.specular * pow(r_v, _material.shininess);
+		}
+
 	}
 
-    return color;
+	// PREVIOUS CODE GIVEN
+	// visualize the normal as a RGB color for now.
+	// vec3 color = (_normal + vec3(1)) / 2.0;
+	
+	return color;
 }
 
 //-----------------------------------------------------------------------------
