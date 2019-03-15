@@ -205,29 +205,23 @@ bool Mesh::intersect_bounding_box(const Ray& _ray) const
     vec3 nx = vec3(1,0,0);
     vec3 ny = vec3(0,1,0);
     vec3 nz = vec3(0,0,1);
+    vec3 n[3] = {nx, ny, nz};
+    vec3 bb_points[2] = {bb_min_, bb_max_};
     vec3 intersectionpoint;
     vec3 intersectionnormal;
     double t;
+    double tol = 1e-10;
     bool inters[6];
-
-    Plane(bb_min_, nx).intersect(_ray, intersectionpoint, intersectionnormal, t);
-    inters[0] = (intersectionpoint[1]>=bb_min_[1] && intersectionpoint[1]<=bb_max_[1] && intersectionpoint[2]>=bb_min_[2] && intersectionpoint[2]<=bb_max_[2]);
     
-    Plane(bb_max_, nx).intersect(_ray, intersectionpoint, intersectionnormal, t);
-    inters[1] = (intersectionpoint[1]>=bb_min_[1] && intersectionpoint[1]<=bb_max_[1] && intersectionpoint[2]>=bb_min_[2] && intersectionpoint[2]<=bb_max_[2]);
-    
-    Plane(bb_min_, ny).intersect(_ray, intersectionpoint, intersectionnormal, t);
-    inters[2] = (intersectionpoint[0]>=bb_min_[0] && intersectionpoint[0]<=bb_max_[0] && intersectionpoint[2]>=bb_min_[2] && intersectionpoint[2]<=bb_max_[2]);
-    
-    Plane(bb_max_, ny).intersect(_ray, intersectionpoint, intersectionnormal, t);
-    inters[3] = (intersectionpoint[0]>=bb_min_[0] && intersectionpoint[0]<=bb_max_[0] && intersectionpoint[2]>=bb_min_[2] && intersectionpoint[2]<=bb_max_[2]);
-    
-    Plane(bb_min_, nz).intersect(_ray, intersectionpoint, intersectionnormal, t);
-    inters[4] = (intersectionpoint[0]>=bb_min_[0] && intersectionpoint[0]<=bb_max_[0] && intersectionpoint[1]>=bb_min_[1] && intersectionpoint[1]<=bb_max_[1]);
-    
+    //Intersection over all the 6 planes, fixing first the plane and then evaluating the intersection with both planes centered in each bb_point
+    for(int k=0; k<3; k=k+1){
+        int w, h; if(k==0){w=1; h=2;} else if(k==1){w=0; h=2;} else{w=0; h=1;}
+        for(int j=0; j<2; j++){
+            Plane(bb_points[j], n[k]).intersect(_ray, intersectionpoint, intersectionnormal, t);
+            inters[k*2+j] = (intersectionpoint[w]+tol>=bb_points[0][w] && intersectionpoint[w]<=bb_points[1][w]+tol && intersectionpoint[h]+tol>=bb_points[0][h] && intersectionpoint[h]<=bb_points[1][h]+tol);
+        }
+    }
     //We have to check only 6-1 faces, since when a ray intersect in one face it has to go out through another (not the same)
-    //Plane(bb_max_, nz).intersect(_ray, intersectionpoint, intersectionnormal, t);
-    //inters[5] = (intersectionpoint[0]>=bb_min_[0] && intersectionpoint[0]<=bb_max_[0] && intersectionpoint[1]>=bb_min_[1] && intersectionpoint[1]<=bb_max_[1]);
 
     if((inters[0] || inters[1] || inters[2] || inters[3] || inters[4]) && t>0){
         return (true);
@@ -237,10 +231,7 @@ bool Mesh::intersect_bounding_box(const Ray& _ray) const
     }
 }
 
-
-
 //-----------------------------------------------------------------------------
-
 
 bool Mesh::intersect(const Ray& _ray,
                      vec3&      _intersection_point,
@@ -282,6 +273,10 @@ bool Mesh::intersect(const Ray& _ray,
 //-----------------------------------------------------------------------------
 
 
+double CramerHelper(vec3 a, vec3  b, vec3 c){
+    return(a[0]*b[1]*c[2]+a[1]*b[2]*c[0]+b[0]*c[1]*a[2]-c[0]*b[1]*a[2]-a[1]*b[0]*c[2]-b[2]*c[1]*a[0]);
+}
+
 bool
 Mesh::
 intersect_triangle(const Triangle&  _triangle,
@@ -315,21 +310,17 @@ intersect_triangle(const Triangle&  _triangle,
     b = p2-p0;
     c = -_ray.direction;
     d = _ray.origin-p0;
-    // Denominator
-    den = (a[0]*b[1]*c[2]+a[1]*b[2]*c[0]+b[0]*c[1]*a[2]-c[0]*b[1]*a[2]-a[1]*b[0]*c[2]-b[2]*c[1]*a[0]); 
 
     //Cramer
+    // Denominator
+    den = CramerHelper(a, b, c);
     // Check if ray is // to the triangle plane
     if(den!=0){
-        beta = (d[0]*b[1]*c[2]+d[1]*b[2]*c[0]+b[0]*c[1]*d[2]-c[0]*b[1]*d[2]-d[1]*b[0]*c[2]-b[2]*c[1]*d[0])/den;
-        gamma = (a[0]*d[1]*c[2]+a[1]*d[2]*c[0]+d[0]*c[1]*a[2]-c[0]*d[1]*a[2]-a[1]*d[0]*c[2]-d[2]*c[1]*a[0])/den;
-        t = (a[0]*b[1]*d[2]+a[1]*b[2]*d[0]+b[0]*d[1]*a[2]-d[0]*b[1]*a[2]-a[1]*b[0]*d[2]-b[2]*d[1]*a[0])/den;
+        beta = CramerHelper(d, b, c)/den;
+        gamma = CramerHelper(a, d, c)/den;
+        t = CramerHelper(a, b, d)/den;
         alpha = 1 - beta - gamma;
         if (alpha>=0 && beta>=0 && gamma>=0 && t>0){
-            /*_intersection_point[0] = alpha*p0[0]+beta*p1[0]+gamma*p2[0];
-            _intersection_point[1] = alpha*p0[1]+beta*p1[1]+gamma*p2[1];
-            _intersection_point[2] = alpha*p0[2]+beta*p1[2]+gamma*p2[2];
-            equals to: */
             _intersection_point = _ray.origin + t*_ray.direction;
             _intersection_t = t;
             if(draw_mode_==FLAT){
@@ -350,6 +341,5 @@ intersect_triangle(const Triangle&  _triangle,
         return(false);
     }
 }
-
 
 //=============================================================================
