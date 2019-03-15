@@ -223,7 +223,7 @@ bool Mesh::intersect_bounding_box(const Ray& _ray) const
     }
     //We have to check only 6-1 faces, since when a ray intersect in one face it has to go out through another (not the same)
 
-    if((inters[0] || inters[1] || inters[2] || inters[3] || inters[4]) && t>0){
+    if(inters[0] || inters[1] || inters[2] || inters[3] || inters[4]){
         return (true);
     }
     else{
