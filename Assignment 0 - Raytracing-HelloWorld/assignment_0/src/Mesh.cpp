@@ -201,7 +201,7 @@ bool Mesh::intersect_bounding_box(const Ray& _ray) const
     * with all triangles of every mesh in the scene. The bounding boxes are computed
     * in `Mesh::compute_bounding_box()`.
     */
-
+    /*
     vec3 nx = vec3(1,0,0);
     vec3 ny = vec3(0,1,0);
     vec3 nz = vec3(0,0,1);
@@ -229,6 +229,42 @@ bool Mesh::intersect_bounding_box(const Ray& _ray) const
     else{
         return(false);
     }
+    */
+    //MORE EFFICIENT:
+    bool exists_intersection = true; //We will change this value if there is no intersection ray-cube
+	//Now loop over the coordinates (0->x), (1->y), (2->z)
+	//Computing the bounders for t inside the corresponding infinite slabel 
+	//E.g. {(x,y,z): x_min <= x <= x_max} is the infinite slabel corresponding to the x coordinate
+	double min_t_possible;
+	double max_t_possible;
+	for (int i = 0; i < 3 && exists_intersection; i++) {
+		double slabel_ray_min_t;
+		double slabel_ray_max_t;
+		//Deduct t_min and t_max from the inequations:
+		if (_ray.direction[i] > 0) {
+			slabel_ray_min_t = (bb_min_[i] - _ray.origin[i]) / _ray.direction[i];
+			slabel_ray_max_t = (bb_max_[i] - _ray.origin[i]) / _ray.direction[i];
+		}
+		else {
+			slabel_ray_max_t = (bb_min_[i] - _ray.origin[i]) / _ray.direction[i];
+			slabel_ray_min_t = (bb_max_[i] - _ray.origin[i]) / _ray.direction[i];
+		}
+		if (i == 0) {
+			min_t_possible = slabel_ray_min_t;
+			max_t_possible = slabel_ray_max_t;
+		}else {
+			if (min_t_possible < slabel_ray_min_t) {
+				min_t_possible = slabel_ray_min_t;
+			}
+			if (max_t_possible > slabel_ray_max_t) {
+				max_t_possible = slabel_ray_max_t;
+			}
+			if (min_t_possible > max_t_possible) {
+				exists_intersection = false;
+			}
+		}
+	}
+	return exists_intersection;
 }
 
 //-----------------------------------------------------------------------------
