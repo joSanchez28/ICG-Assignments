@@ -342,43 +342,46 @@ intersect_triangle(const Triangle&  _triangle,
     * Refer to [Cramer's Rule](https://en.wikipedia.org/wiki/Cramer%27s_rule) to easily solve it.
      */
 
-    vec3 a, b, c, d;
-    double den, alpha, beta, gamma, t;
+ 	vec3 a, b, c, d;
+	double det, alpha, beta, gamma, t;
 
-    a = p1-p0;
-    b = p2-p0;
-    c = -_ray.direction;
-    d = _ray.origin-p0;
+	// Have used ray.origin + t*ray.dir = alpha*p0 + beta*p1 + gamma*p2 where alpha = 1 - beta - gamma
+	// Rearrangment explained in README
 
-    //Cramer
-    // Denominator
-    den = CramerHelper(a, b, c);
-    // Check if ray is // to the triangle plane
-    if(den!=0){
-        beta = CramerHelper(d, b, c)/den;
-        gamma = CramerHelper(a, d, c)/den;
-        t = CramerHelper(a, b, d)/den;
-        alpha = 1 - beta - gamma;
-        if (alpha>=0 && beta>=0 && gamma>=0 && t>0){
-            _intersection_point = _ray.origin + t*_ray.direction;
-            _intersection_t = t;
-            if(draw_mode_==FLAT){
-                _intersection_normal = _triangle.normal;
-            }
-            else{
-                _intersection_normal = normalize(alpha*vertices_[_triangle.i0].normal + beta*vertices_[_triangle.i1].normal + gamma*vertices_[_triangle.i2].normal);
-            }
+	a = p1 - p0;
+	b = p2 - p0;
+	c = -_ray.direction;
+	d = _ray.origin - p0;
 
-            return(true);
-        }
-        else{
-            return(false);
-        }
-    }
-    else{
+	// Use CramerHelper to find determinant of 3x3 matrix (a, b and c form the columns) 
+	det = CramerHelper(a, b, c);
+	// Check if ray is // to the triangle plane
+	if (det != 0) {
+		beta = CramerHelper(d, b, c) / det;
+		gamma = CramerHelper(a, d, c) / det;
+		t = CramerHelper(a, b, d) / det;
+		alpha = 1 - beta - gamma;
+		if (alpha >= 0 && beta >= 0 && gamma >= 0 && t > 0) { // conditions for barycentric coords and t 
+			_intersection_point = _ray.origin + t * _ray.direction; // find intersection point
+			_intersection_t = t; // store ray parameter
+			// use draw mode to determine whether mesh object is flat or Phong shaded
+			if (draw_mode_ == FLAT) { // if flat store normal as normal of intersected triangle
+				_intersection_normal = _triangle.normal; 
+			}
+			else { // if Phong store normal as linearly interpolated vertex normals of intersected triangle (and normalize it)
+				_intersection_normal = normalize(alpha*vertices_[_triangle.i0].normal + beta * vertices_[_triangle.i1].normal + gamma * vertices_[_triangle.i2].normal);
+			}
 
-        return(false);
-    }
+			return(true);
+		}
+		else {
+			return(false);
+		}
+	}
+	else {
+
+		return(false);
+	}
 }
 
 //=============================================================================
