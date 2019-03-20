@@ -152,21 +152,24 @@ void Mesh::compute_normals()
      * - Weigh the normals by their triangles' angles.
      */
 
-    double w0, w1, w2;
-    vec3 wn;
-    for (Triangle& t: triangles_){
-        angleWeights(vertices_[t.i0].position, vertices_[t.i1].position, vertices_[t.i2].position, w0, w1, w2);
-        wn = vec3(w0, w1, w2);
-        vertices_[t.i0].normal = vertices_[t.i0].normal + wn[0]*t.normal;
-        vertices_[t.i1].normal = vertices_[t.i1].normal + wn[1]*t.normal;  
-        vertices_[t.i2].normal = vertices_[t.i2].normal + wn[2]*t.normal;
-        
-    }
-    
-    for (Vertex& v: vertices_)
-    {
-        v.normal = v.normal/norm(v.normal);
-    }
+	// use for loop to visit each triangle only once
+	for (Triangle& t : triangles_)
+	{
+		double w0, w1, w2;
+		// use angleWeights to find the weights by which to scale each vertex of an incident triangle
+		angleWeights(vertices_[t.i0].position, vertices_[t.i1].position, vertices_[t.i2].position, w0, w1, w2);
+
+		// add contribution of each vertex of each triangle to vertex normals
+		vertices_[t.i0].normal += t.normal * w0;
+		vertices_[t.i1].normal += t.normal * w1;
+		vertices_[t.i2].normal += t.normal * w2;
+	}
+
+	// now normalize all computed vertex normals
+	for (Vertex &v : vertices_) {
+		v.normal = normalize(v.normal);
+	}
+	
 }
 
 
