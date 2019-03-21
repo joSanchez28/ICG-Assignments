@@ -248,9 +248,19 @@ bool Mesh::intersect_bounding_box(const Ray& _ray) const
 			slabel_ray_min_t = (bb_min_[i] - _ray.origin[i]) / _ray.direction[i];
 			slabel_ray_max_t = (bb_max_[i] - _ray.origin[i]) / _ray.direction[i];
 		}
-		else {
+		else if(_ray.direction[i] < 0){
 			slabel_ray_max_t = (bb_min_[i] - _ray.origin[i]) / _ray.direction[i];
 			slabel_ray_min_t = (bb_max_[i] - _ray.origin[i]) / _ray.direction[i];
+		}
+		else{
+		    if(!(_ray.origin[i]<bb_max_[i] && _ray.origin[i]>bb_min_[i])){
+			slabel_ray_min_t = 0;
+			slabel_ray_max_t = 0;
+		    }
+		    else{
+			slabel_ray_min_t = -INFINITY;
+			slabel_ray_max_t = INFINITY;
+		    }
 		}
 		if (i == 0) {
 			min_t_possible = slabel_ray_min_t;
