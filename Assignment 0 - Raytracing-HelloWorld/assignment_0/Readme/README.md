@@ -18,7 +18,9 @@ Using the draw_mode variable, we could determine if an object should be flat or 
 alpha * n0 + beta * n1 + gamma * n2,
 where n0, n1 and n2 are the triangle's three vertex normals. If it was flat shaded we could just store the normal as the ray-triangle intersection normal. 
 
-For the last part, we had to check whether a ray intersects with the current mesh's bounding box by filling in the function intersect_bounding_box (). This was acheived by assuming that there is an intersection and then computing when there would not be one. We could do this by going through 
+For the last part, we had to check whether a ray intersects with the current mesh's bounding box by filling in the function intersect_bounding_box (). The best best approach we have found is to consider the three infinite "slabs" x_min <= x <= x_max, y_min <= y <= y_max, and z_min <= z <= z_max. So we calculate the t possible interval for the segment of the ray o + t d that falls within a single one of these slabs. Then we combine these intervals to find the possible t values (if any) for which the ray is simultaneously within all three of these slabs. The implementation is described below:
+
+We first assume that there is an intersection and then computing when there would not be one. We could do this by going through 
 each direction (x, y, z) and computing the ray parameter for intersection by equating the ray equation to the bounding box coordinates, i.e.
 _ray.origin[i] + t * _ray.direction[i] = bb_[i],
 where the integer i will be either of the 3 coordinates and bb_ could be either box coordinates (bb_max or min). This is equivalent of the ray intersecting with an infinite plane that has boundaries (1d) of the bounding box. 
