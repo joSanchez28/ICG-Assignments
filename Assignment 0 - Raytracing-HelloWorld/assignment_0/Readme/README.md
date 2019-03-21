@@ -18,6 +18,13 @@ Using the draw_mode variable, we could determine if an object should be flat or 
 alpha * n0 + beta * n1 + gamma * n2,
 where n0, n1 and n2 are the triangle's three vertex normals. If it was flat shaded we could just store the normal as the ray-triangle intersection normal. 
 
+For the last part, we had to check whether a ray intersects with the current mesh's bounding box by filling in the function intersect_bounding_box (). This was acheived by assuming that there is an intersection and then computing when there would not be one. We could do this by going through 
+each direction (x, y, z) and computing the ray parameter for intersection by equating the ray equation to the bounding box coordinates, i.e.
+_ray.origin[i] + t * _ray.direction[i] = bb_[i],
+where the integer i will be either of the 3 coordinates and bb_ could be either box coordinates (bb_max or min). This is equivalent of the ray intersecting with an infinite plane that has boundaries (1d) of the bounding box. 
+Once the first coordinate's (i=0) t_max and min has been calculated it will be stored in the max_t_possible and min_t_possible variables and then the for loop will cycle to the next coordinate (i=1). We store new max_t_possible and min_t_possible variables if the new t values calculated make the boundaries smaller.
+There will be no intersection if min_t_possible > max_t_possible. To help with this explanation see bounding_box_intersection_examples.pdf. 
+
 
 WORKLOAD DISTRIBUTION
 ==========
