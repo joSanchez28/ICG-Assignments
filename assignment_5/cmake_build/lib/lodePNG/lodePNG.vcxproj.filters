@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG\lodepng.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG\lodepng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{7C80210B-4CCD-3485-A8AB-2A6133386CBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0C4848A0-706B-3274-A700-E32A2458FAD1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

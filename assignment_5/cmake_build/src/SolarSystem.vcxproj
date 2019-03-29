@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C7A6304F-56EE-3293-85D3-E78F62D3ED5B}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>SolarSystem</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SolarSystem.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SolarSystem.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">SolarSystem.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">SolarSystem.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">SolarSystem</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;GLEW_STATIC;TEXTURE_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures";SHADER_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src";CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;TEXTURE_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures\";SHADER_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src\";CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\Debug\lodePNG.lib;..\Debug\glfw3dll.lib;..\Debug\glew.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/Debug/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/Debug/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;TEXTURE_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures";SHADER_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src";CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;TEXTURE_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures\";SHADER_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src\";CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\Release\lodePNG.lib;..\Release\glfw3dll.lib;..\Release\glew.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/Release/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/Release/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;TEXTURE_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures";SHADER_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src";CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;TEXTURE_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures\";SHADER_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src\";CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\MinSizeRel\lodePNG.lib;..\MinSizeRel\glfw3dll.lib;..\MinSizeRel\glew.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/MinSizeRel/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/MinSizeRel/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;TEXTURE_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures";SHADER_PATH="C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src";CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;TEXTURE_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/textures\";SHADER_PATH=\"C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src\";CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glfw\include;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\lodePNG;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\lib\glew;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\RelWithDebInfo\lodePNG.lib;..\RelWithDebInfo\glfw3dll.lib;..\RelWithDebInfo\glew.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/RelWithDebInfo/SolarSystem.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/RelWithDebInfo/SolarSystem.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5 -BC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build --check-stamp-file C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5 -BC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build --check-stamp-file C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5 -BC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build --check-stamp-file C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5 -BC:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build --check-stamp-file C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/src/CMakeLists.txt;C:\Program Files\CMake\share\cmake-3.14\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.14\Modules\FindPackageMessage.cmake;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\bezier.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\billboard.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\frame.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\gl.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glfw_window.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glmath.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\path.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\planet.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\shader.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\ship.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\sphere.h" />
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\texture.h" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\bezier.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\billboard.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glfw_window.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glmath.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\main.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\shader.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\ship.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\sphere.cpp" />
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\texture.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\ZERO_CHECK.vcxproj">
+      <Project>{3C7EA636-9F97-37D5-BEAE-9C8FBD6FFDA0}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\lib\glew\glew.vcxproj">
+      <Project>{DFDA324A-3266-3ADA-9723-45F5F6E686ED}</Project>
+      <Name>glew</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\lib\glfw\src\glfw.vcxproj">
+      <Project>{EDFD1413-32C1-3C41-BA71-7E460A75DB31}</Project>
+      <Name>glfw</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\lib\lodePNG\lodePNG.vcxproj">
+      <Project>{192E948A-068C-32AF-8A2D-926B572A951E}</Project>
+      <Name>lodePNG</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

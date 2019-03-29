@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\bezier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\billboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glfw_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glmath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\bezier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\billboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\frame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\gl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glfw_window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\glmath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\planet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{7C80210B-4CCD-3485-A8AB-2A6133386CBA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0C4848A0-706B-3274-A700-E32A2458FAD1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

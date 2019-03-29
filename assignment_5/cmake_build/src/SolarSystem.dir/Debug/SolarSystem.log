@@ -1,0 +1,26 @@
+﻿  solar_viewer.cpp
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\glmath.h(274): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\planet.h(41): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\planet.h(42): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\frame.h(45): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\frame.h(47): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\frame.h(67): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\frame.h(69): warning C4244: 'argumento': conversión de 'double' a '_Ty'; posible pérdida de datos
+          with
+          [
+              _Ty=GLfloat
+          ]
+c:\users\jorge\documents\github\icg-projects\assignment_5\src\frame.h(70): warning C4244: 'argumento': conversión de 'double' a '_Ty'; posible pérdida de datos
+          with
+          [
+              _Ty=GLfloat
+          ]
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(99): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(108): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(234): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(396): warning C4244: 'argumento': conversión de 'double' a 'const float'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(397): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(422): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(493): warning C4018: '<': no coinciden signed/unsigned
+  SolarSystem.vcxproj -> C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\Debug\SolarSystem.exe

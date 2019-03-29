@@ -1,0 +1,4 @@
+﻿  Building Custom Rule C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/lib/glew/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/jorge/Documents/GitHub/ICG-Projects/assignment_5/cmake_build/lib/glew/CMakeFiles/generate.stamp is up-to-date.
+  glew.cpp
+  glew.vcxproj -> C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\Debug\glew.lib
