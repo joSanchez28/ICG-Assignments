@@ -43,7 +43,7 @@ Solar_viewer::Solar_viewer(const char* _title, int _width, int _height)
 {
     // start animation
     timer_active_ = true;
-    time_step_ = 10.0f/24.0f; // one hour  #SHOULD BE 1.0
+    time_step_ = 100.0f/24.0f; // one hour  #SHOULD BE 1.0
 
     // rendering parameters
     greyscale_     = false;
@@ -227,18 +227,22 @@ void Solar_viewer::update_body_positions() {
      * */
 
 	//Firstly update the Earth position:
-	//earth_.pos_[0] = cos(earth_.angle_orbit_) * earth_.distance_;
-	//earth_.pos_[2] = sin(earth_.angle_orbit_) * earth_.distance_;
-	//earth_.pos_ = mat4::rotate_y(earth_.angle_orbit_) * mat4::translate(vec4(0, 0, earth_.distance_,0.0)) * vec4(0, 0, 0, 1.0);
+	//earth_.pos_[0] = cos(earth_.angle_orbit_ * 3.1416/180) * earth_.distance_;
+	//earth_.pos_[2] = sin(earth_.angle_orbit_ * 3.1416 / 180) * earth_.distance_;
+	//earth_.pos_ = mat4::rotate_y(earth_.angle_orbit_) * mat4::translate(vec4(earth_.distance_, 0, 0, 0.0)) * vec4(0, 0, 0, 1.0);
+	
 	std::array<Planet *, 4> planets = {&mercury_, &venus_, &earth_, &mars_ }; //&moon_
 	for (int i = 0; i < planets.size(); i++) {
-		(*planets[i]).pos_[0] = cos((*planets[i]).angle_orbit_) * (*planets[i]).distance_;
-		(*planets[i]).pos_[2] = sin((*planets[i]).angle_orbit_) * (*planets[i]).distance_;
+		//(*planets[i]).pos_[0] = cos((*planets[i]).angle_orbit_) * (*planets[i]).distance_;
+		//(*planets[i]).pos_[2] = sin((*planets[i]).angle_orbit_) * (*planets[i]).distance_;
+		(*planets[i]).pos_ = mat4::rotate_y((*planets[i]).angle_orbit_) * mat4::translate(vec4((*planets[i]).distance_, 0, 0, 0.0)) 
+			* vec4(0, 0, 0, 1.0);
 	}
 	//Now update the moon position:
-	moon_.pos_[0] = cos(moon_.angle_orbit_) * moon_.distance_ + earth_.pos_[0];
-	moon_.pos_[2] = sin(moon_.angle_orbit_) * moon_.distance_ + earth_.pos_[2];
-
+	moon_.pos_ = earth_.pos_ + mat4::rotate_y(moon_.angle_orbit_) * vec4(moon_.distance_, 0, 0, 1.0);
+	//moon_.pos_[0] = cos(moon_.angle_orbit_) * moon_.distance_ + earth_.pos_[0];
+	//moon_.pos_[2] = sin(moon_.angle_orbit_) * moon_.distance_ + earth_.pos_[2];
+	
 }
 
 //-----------------------------------------------------------------------------
@@ -378,23 +382,20 @@ void Solar_viewer::paint()
 		center = (*planet_to_look_at_).pos_;
 		eye = mat4::translate(vec4(0, 0, dist_factor_ * (*planet_to_look_at_).radius_, 0.0)) * center;
 
-		/*eye[2] += dist_factor_ * (*planet_to_look_at_).radius_;
-
 		//Considering the angles:
-		//x_angle:
-		eye[1] += (*planet_to_look_at_).radius_ * dist_factor_ * sin(x_angle_);
-		eye[2] += (*planet_to_look_at_).radius_ * dist_factor_ * cos(x_angle_);
-		//y_angle:
-		eye[2] += (*planet_to_look_at_).radius_ * dist_factor_ * sin(y_angle_);
-		eye[0] += (*planet_to_look_at_).radius_ * dist_factor_ * cos(y_angle_);
-		*/
-		//float radius = (*planet_to_look_at_).radius_;
+		//rotated_point = origin + (orientation_quaternion * (point - origin));
+		eye = center + (mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * (eye - center));
 	}
 	else {
-		double distance_factor = 0.1;
+		//double distance_factor = 0.1;
 		center = ship_.pos_;
-		eye = mat4::translate(-distance_factor * normalize(vec3(ship_.direction_))) * center;
-		eye[1] += distance_factor/3;
+		//eye = mat4::translate(-distance_factor * normalize(vec3(ship_.direction_))) * center;
+		eye = mat4::translate(vec4(0, 0, -2 * dist_factor_ * ship_.radius_, 0.0)) * center;
+		eye[1] += ship_.radius_ * dist_factor_ /2;
+
+		//Considering the angles:
+		//rotated_point = origin + (orientation_quaternion * (point - origin));
+		eye = center + (mat4::rotate_y(ship_.angle_) * mat4::rotate_y(y_angle_) * (eye - center));
 	}
 
 	vec4      up = vec4(0, 1, 0, 0);
@@ -503,7 +504,7 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
 		unit_sphere_.draw();
 	}
 	//Render the spaceship:
-	m_matrix = mat4::translate( ship_.pos_ ) *  mat4::scale(ship_.radius_);
+	m_matrix = mat4::translate( ship_.pos_ ) * mat4::rotate_y(ship_.angle_) * mat4::scale(ship_.radius_);
 	mv_matrix = _view * m_matrix;
 	mvp_matrix = _projection * mv_matrix;
 	color_shader_.use();
