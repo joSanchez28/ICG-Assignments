@@ -375,31 +375,26 @@ void Solar_viewer::paint()
     //vec4      up = vec4(0,1,0,0);
     //float radius = sun_.radius_;
     //mat4    view = mat4::look_at(vec3(eye), vec3(center), vec3(up));
-	vec4 center;
-	vec4 eye;
-	if (!in_ship_) {
-		//First position (without angles movement)
-		center = (*planet_to_look_at_).pos_;
-		eye = mat4::translate(vec4(0, 0, dist_factor_ * (*planet_to_look_at_).radius_, 0.0)) * center;
+    vec4 center;
+    vec4 eye;
+	
+    if (!in_ship_) {
+	//Center the planet
+	center = (*planet_to_look_at_).pos_;
+	//Positioning the eye at a distance in z from the sun (origin of the scene) and rotating it. Then translation to its correct place.
+	eye = mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * vec4(0, 0, dist_factor_ * (*planet_to_look_at_).radius_, 1);
+	eye = mat4::translate(eye) * center;
+    }
+    else {
+	eye = mat4::rotate_y(ship_.angle_) * mat4::rotate_y(y_angle_)* vec4(0, 0, -5*dist_factor_ * ship_.radius_, 1);
+	eye = mat4::translate(eye) * center;    
+	eye[1] += ship_.radius_ * dist_factor_ ;
+    }
 
-		//Considering the angles:
-		//rotated_point = origin + (orientation_quaternion * (point - origin));
-		eye = center + (mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * (eye - center));
-	}
-	else {
-		//double distance_factor = 0.1;
-		center = ship_.pos_;
-		//eye = mat4::translate(-distance_factor * normalize(vec3(ship_.direction_))) * center;
-		eye = mat4::translate(vec4(0, 0, -2 * dist_factor_ * ship_.radius_, 0.0)) * center;
-		eye[1] += ship_.radius_ * dist_factor_ /2;
+    vec4 up = vec4(0, 1, 0, 0);
+    up = (mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * up);
 
-		//Considering the angles:
-		//rotated_point = origin + (orientation_quaternion * (point - origin));
-		eye = center + (mat4::rotate_y(ship_.angle_) * mat4::rotate_y(y_angle_) * (eye - center));
-	}
-
-	vec4      up = vec4(0, 1, 0, 0);
-	mat4 view = mat4::look_at(vec3(eye), vec3(center), vec3(up));
+    mat4 view = mat4::look_at(vec3(eye), vec3(center), vec3(up));
 
     billboard_x_angle_ = billboard_y_angle_ = 0.0f;
 
