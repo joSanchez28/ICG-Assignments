@@ -225,24 +225,13 @@ void Solar_viewer::update_body_positions() {
      *       and earth's moon. Do not explicitly place the space ship, it's position
      *       is fixed for now.
      * */
-
-	//Firstly update the Earth position:
-	//earth_.pos_[0] = cos(earth_.angle_orbit_ * 3.1416/180) * earth_.distance_;
-	//earth_.pos_[2] = sin(earth_.angle_orbit_ * 3.1416 / 180) * earth_.distance_;
-	//earth_.pos_ = mat4::rotate_y(earth_.angle_orbit_) * mat4::translate(vec4(earth_.distance_, 0, 0, 0.0)) * vec4(0, 0, 0, 1.0);
 	
 	std::array<Planet *, 4> planets = {&mercury_, &venus_, &earth_, &mars_ }; //&moon_
 	for (int i = 0; i < planets.size(); i++) {
-		//(*planets[i]).pos_[0] = cos((*planets[i]).angle_orbit_) * (*planets[i]).distance_;
-		//(*planets[i]).pos_[2] = sin((*planets[i]).angle_orbit_) * (*planets[i]).distance_;
-		(*planets[i]).pos_ = mat4::rotate_y((*planets[i]).angle_orbit_) * mat4::translate(vec4((*planets[i]).distance_, 0, 0, 0.0)) 
-			* vec4(0, 0, 0, 1.0);
+		(*planets[i]).pos_ = mat4::rotate_y((*planets[i]).angle_orbit_) * vec4((*planets[i]).distance_, 0, 0, 1.0);
 	}
 	//Now update the moon position:
 	moon_.pos_ = earth_.pos_ + mat4::rotate_y(moon_.angle_orbit_) * vec4(moon_.distance_, 0, 0, 1.0);
-	//moon_.pos_[0] = cos(moon_.angle_orbit_) * moon_.distance_ + earth_.pos_[0];
-	//moon_.pos_[2] = sin(moon_.angle_orbit_) * moon_.distance_ + earth_.pos_[2];
-	
 }
 
 //-----------------------------------------------------------------------------
@@ -369,12 +358,7 @@ void Solar_viewer::paint()
      *
      *  Hint: planet centers are stored in "Planet::pos_".
      */
-    // For now, view the sun from a fixed position...
-    //vec4     eye = vec4(0,0,7,1.0);
-    //vec4  center = sun_.pos_;
-    //vec4      up = vec4(0,1,0,0);
-    //float radius = sun_.radius_;
-    //mat4    view = mat4::look_at(vec3(eye), vec3(center), vec3(up));
+
     vec4 center;
     vec4 eye;
 	
@@ -382,7 +366,7 @@ void Solar_viewer::paint()
 	//Center the planet
 	center = (*planet_to_look_at_).pos_;
 	//Positioning the eye at a distance in z from the sun (origin of the scene) and rotating it. Then translation to its correct place.
-	eye = mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * vec4(0, 0, dist_factor_ * (*planet_to_look_at_).radius_, 1);
+	eye = mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * vec4(0, 0, dist_factor_ * (*planet_to_look_at_).radius_, 0);
 	eye = mat4::translate(eye) * center;
     }
     else {
@@ -440,7 +424,7 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
     static float sun_animation_time = 0;
     if (timer_active_) sun_animation_time += 0.01f;
 
-    // render sun
+    // Render sun
     m_matrix = mat4::rotate_y(sun_.angle_self_) * mat4::scale(sun_.radius_);
     mv_matrix = _view * m_matrix;
     mvp_matrix = _projection * mv_matrix;
@@ -472,19 +456,6 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
      *
      *  Hint: See how it is done for the Sun in the code above.
      */
-	 // render earth
-	/*
-	m_matrix = mat4::translate(earth_.pos_) * mat4::rotate_y(earth_.angle_self_) * mat4::scale(earth_.radius_);
-	mv_matrix = _view * m_matrix;
-	mvp_matrix = _projection * mv_matrix;
-	color_shader_.use();
-	color_shader_.set_uniform("modelview_projection_matrix", mvp_matrix);
-	color_shader_.set_uniform("t", sun_animation_time, true);
-	color_shader_.set_uniform("tex", 0);
-	color_shader_.set_uniform("greyscale", (int)greyscale_);
-	earth_.tex_.bind();
-	unit_sphere_.draw();
-	*/
 	std::array<Planet *, 5> planets = { &mercury_, &venus_, &earth_, &mars_, &moon_ };
 	for (int i = 0; i < planets.size(); i++) {
 		m_matrix = mat4::translate((*planets[i]).pos_) * mat4::rotate_y((*planets[i]).angle_self_) * mat4::scale((*planets[i]).radius_);
@@ -498,7 +469,8 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
 		(*planets[i]).tex_.bind();
 		unit_sphere_.draw();
 	}
-	//Render the spaceship:
+	
+	// Render the spaceship:
 	m_matrix = mat4::translate( ship_.pos_ ) * mat4::rotate_y(ship_.angle_) * mat4::scale(ship_.radius_);
 	mv_matrix = _view * m_matrix;
 	mvp_matrix = _projection * mv_matrix;
@@ -510,6 +482,7 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
 	ship_.tex_.bind();
 	ship_.draw();
 	
+	// Render the stars background
 	m_matrix = mat4::rotate_y(stars_.angle_self_) * mat4::scale(stars_.radius_);
 	mv_matrix = _view * m_matrix;
 	mvp_matrix = _projection * mv_matrix;
