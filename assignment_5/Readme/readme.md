@@ -2,7 +2,8 @@ DESCRIPTION OF THE ASSIGNMENT SOLUTION
 ==========
 In this assignment we have built the scene containing the Solar system with the Sun, some planets, the Moon and a spaceship.
 
-The first part consisted in placing (computing its coordinates) the objects in the scene depending on the time. For doing that we implemented the `update_body_positions()` method. This method update the position of the planets based on their distance to their orbit's centre (the Sun for the planets and the Earth for the Moon). We have done that rotating the initial position of the planets (a position which is the orbit radius (`planet.distance_`) distant to the centre) using its parameter `angle_orbit_`, which already changes in time.
+The first part consisted of placing the objects in the scene by filling in the missing code in the update_body_positions() function. This was achieved by rotating the initial position of the planets (given by distance_) by the angle angle_orbit_ which changes with simulation time; mat4::rotate_y was used to implement this tranformation. 
+It should be noted that the moon orbits around the earth and therefore we had to add its coordinates that were computed in the same way as above to the earth's position so that the moon's position would be correct in the world coordinate frame. 
 
 The second part was about placing the eye in the scene to look at a determined object (which we will able to choose with the keyboard controls). So, we implemented the `paint()` method. We distinguish two cases for calculate the eye position:
 
