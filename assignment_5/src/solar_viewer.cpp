@@ -226,11 +226,14 @@ void Solar_viewer::update_body_positions() {
      *       is fixed for now.
      * */
 	
-	std::array<Planet *, 4> planets = {&mercury_, &venus_, &earth_, &mars_ }; //&moon_
+	// create array for planets orbiting sun (i.e. not include moon)
+	std::array<Planet *, 4> planets = {&mercury_, &venus_, &earth_, &mars_ };
+	
+	// for loop cycles through each planet and updates their position 
 	for (int i = 0; i < planets.size(); i++) {
 		(*planets[i]).pos_ = mat4::rotate_y((*planets[i]).angle_orbit_) * vec4((*planets[i]).distance_, 0, 0, 1.0);
 	}
-	//Now update the moon position:
+	// update moon's position as have to take into account that moon orbits the earth 
 	moon_.pos_ = earth_.pos_ + mat4::rotate_y(moon_.angle_orbit_) * vec4(moon_.distance_, 0, 0, 1.0);
 }
 
