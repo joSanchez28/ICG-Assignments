@@ -462,11 +462,18 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
      *
      *  Hint: See how it is done for the Sun in the code above.
      */
+	
+	// Render planets
 	std::array<Planet *, 5> planets = { &mercury_, &venus_, &earth_, &mars_, &moon_ };
+	// for loop will cycle through each planet
 	for (int i = 0; i < planets.size(); i++) {
+		// compute model matrix
 		m_matrix = mat4::translate((*planets[i]).pos_) * mat4::rotate_y((*planets[i]).angle_self_) * mat4::scale((*planets[i]).radius_);
+		// compute model-view matrix
 		mv_matrix = _view * m_matrix;
+		// compute model-view-projection matrix
 		mvp_matrix = _projection * mv_matrix;
+		// set up shader
 		color_shader_.use();
 		color_shader_.set_uniform("modelview_projection_matrix", mvp_matrix);
 		color_shader_.set_uniform("t", sun_animation_time, true);
@@ -476,7 +483,7 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
 		unit_sphere_.draw();
 	}
 	
-	// Render the spaceship:
+	// Render spaceship
 	m_matrix = mat4::translate( ship_.pos_ ) * mat4::rotate_y(ship_.angle_) * mat4::scale(ship_.radius_);
 	mv_matrix = _view * m_matrix;
 	mvp_matrix = _projection * mv_matrix;
@@ -488,7 +495,7 @@ void Solar_viewer::draw_scene(mat4& _projection, mat4& _view)
 	ship_.tex_.bind();
 	ship_.draw();
 	
-	// Render the stars background
+	// Render stars background (where stars_ is sphere which gives impression of starry background)
 	m_matrix = mat4::rotate_y(stars_.angle_self_) * mat4::scale(stars_.radius_);
 	mv_matrix = _view * m_matrix;
 	mvp_matrix = _projection * mv_matrix;
