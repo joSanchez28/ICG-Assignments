@@ -362,22 +362,25 @@ void Solar_viewer::paint()
      *  Hint: planet centers are stored in "Planet::pos_".
      */
 
-    vec4 center;
-    vec4 eye;
-	
+    vec4 center; // center point to look at
+    vec4 eye; // eye's position
+
     if (!in_ship_) {
-	//Center the planet
+	// center of object to be observed (selected by keys 1-6)
 	center = (*planet_to_look_at_).pos_;
-	//Positioning the eye at a distance in z from the sun (origin of the scene) and rotating it. Then translation to its correct place.
+	// first place eye at positive distance on z-axis, then rotate eye position (applying rotation around x-axis first)
 	eye = mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * vec4(0, 0, dist_factor_ * (*planet_to_look_at_).radius_, 0);
+	    // translating eye to correct place (i.e. from world coord frame to model coord frame of selected object)
 	eye = mat4::translate(eye) * center;
     }
+	// observing ship therefore rotation around x-axis is fixed (i.e. ignore current value of x_angle)
     else {
 	eye = mat4::rotate_y(ship_.angle_) * mat4::rotate_y(y_angle_)* vec4(0, 0, -5*dist_factor_ * ship_.radius_, 1);
 	eye = mat4::translate(eye) * center;    
 	eye[1] += ship_.radius_ * dist_factor_ ;
     }
 
+	// compute vector pointing upwards wrt eye's optical axis
     vec4 up = vec4(0, 1, 0, 0);
     up = (mat4::rotate_x(x_angle_) * mat4::rotate_y(y_angle_) * up);
 
