@@ -18,7 +18,7 @@ c:\users\jorge\documents\github\icg-projects\assignment_5\src\frame.h(70): warni
 C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(43): warning C4305: 'argumento': truncamiento de 'double' a 'const float'
 C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(99): warning C4305: '=': truncamiento de 'double' a 'float'
 C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(108): warning C4305: '=': truncamiento de 'double' a 'float'
-C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(235): warning C4018: '<': no coinciden signed/unsigned
-C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(423): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(494): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(233): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(411): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\src\solar_viewer.cpp(472): warning C4018: '<': no coinciden signed/unsigned
   SolarSystem.vcxproj -> C:\Users\jorge\Documents\GitHub\ICG-Projects\assignment_5\cmake_build\Debug\SolarSystem.exe
