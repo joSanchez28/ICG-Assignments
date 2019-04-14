@@ -44,7 +44,45 @@ mat4 ShadowViewer::m_constructLightViewMatrix(size_t li, size_t cube_face) const
     * defined by scene_view_matrix.
     * Hint: use mat4::look_at
     **/
-    return mat4::identity() * scene_view_matrix;
+	
+	// need to use current eye view matrix as want orientation of shadow map aligned with current eye coord 
+	// eye view matrix is scene_view_matrix
+	// need diff view matrix for each cube face (therefore use look_at)
+	// up vect is ylc
+
+	mat4 light_view;
+	for (size_t i = 0; i < m_numActiveLights; ++i) {
+		vec3 li_position = m_light[0].position();
+		// for +x (face 0)
+		// vec3 eye = position of light camera
+		// vec3 center = center of face 0 
+		// vec3 up = ylc
+		for (size_t cube_face = 0; cube_face < 1; cube_face++) {
+			mat4 light_view = mat4::look_at(li_position, li_position + vec3(1, 0, 0), li_position + vec3(0, 1, 0));
+		}
+		// for -x (face 1)
+		for (size_t cube_face = 1; cube_face < 2; cube_face++) {
+			mat4 light_view = mat4::look_at(li_position, li_position + vec3(-1, 0, 0), li_position + vec3(0, 1, 0));
+		}
+		// for +y (face 2)
+		for (size_t cube_face = 2; cube_face < 3; cube_face++) {
+			mat4 light_view = mat4::look_at(li_position, li_position + vec3(0, 1, 0), li_position + vec3(0, 0, -1));
+		}
+		// for -y (face 3)
+		for (size_t cube_face = 3; cube_face < 4; cube_face++) {
+			mat4 light_view = mat4::look_at(li_position, li_position + vec3(0, -1, 0), li_position + vec3(0, 0, -1));
+		}
+		// for +z (face 4)
+		for (size_t cube_face = 4; cube_face < 5; cube_face++) {
+			mat4 light_view = mat4::look_at(li_position, li_position + vec3(0, 0, 1), li_position + vec3(0, 1, 0));
+		}
+		// for -z (face 5)
+		for (size_t cube_face = 5; cube_face < 6; cube_face++) {
+			mat4 light_view = mat4::look_at(li_position, li_position + vec3(0, 0, -1), li_position + vec3(0, 1, 0));
+		}
+	}
+
+    return light_view * scene_view_matrix;
 }
 
 mat4 ShadowViewer::m_constructLightProjectionMatrix() const {
