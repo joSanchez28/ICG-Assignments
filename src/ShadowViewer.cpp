@@ -52,7 +52,15 @@ mat4 ShadowViewer::m_constructLightProjectionMatrix() const {
     * Construct the projection matrix for rendering the scene from the perspective
     * of the light to generate shadow maps.
     **/
-    return mat4::identity();
+	// need to find aspect ratio and fovy 
+	// use perspective matrix 
+	float PI = 3.14159265; // define PI
+	float fovy = 90.0 * (PI / 180.0); // 90 degrees to radians 
+	float aspect = 1.0; // width/height; guessing that width = height since square 
+	float near = 0.1; 
+	float far = 6; 
+
+	return mat4::perspective(fovy, aspect, near, far); 
 }
 
 void ShadowViewer::m_render_shadow_cubemap(size_t li, const mat4 &plane_m_matrix, const mat4 &mesh_m_matrix) {
