@@ -174,6 +174,11 @@ void ShadowViewer::draw(const mat4 &view_matrix, const mat4 &projection_matrix) 
         * output by our shader to the colors already in the framebuffer.
         * Hint: read the documentation for glBlendFunc
         **/
+	    
+		// enable openGL blend capability
+		glEnable(GL_BLEND,);
+		// configure blending mode to make fragment color outputs add to the final image color 
+		glBlendFunc(GL_DST_ALPHA, GL_ONE); // ??
 
         m_phong_shader.use();
         m_shadowMap->bind();
@@ -187,6 +192,28 @@ void ShadowViewer::draw(const mat4 &view_matrix, const mat4 &projection_matrix) 
          * You'll need to pass in the light position ***in eye coordinates** as
          * well as the proper material and transformation matrices.
          **/
+		// floor plane
+		m_phong_shader.use();
+		m_phong_shader.set_uniform("light_position", m_light[li].position()); // not sure if in eye coods here
+		m_phong_shader.set_uniform("light_color", m_light[li].color);
+		m_phong_shader.set_uniform("normal_matrix", plane_n_matrix);
+		m_phong_shader.set_uniform("modelview_matrix", plane_mv_matrix);
+		m_phong_shader.set_uniform("modelview_projection_matrix", plane_mvp_matrix);
+		m_phong_shader.set_uniform("diffuse_color", plane_diffuse);
+		m_phong_shader.set_uniform("specular_color", plane_specular);
+		m_quad.draw();
+
+		
+		// mesh
+		m_phong_shader.use();
+		m_phong_shader.set_uniform("light_position", m_light[li].position()); // not sure if in eye coods here
+		m_phong_shader.set_uniform("light_color", m_light[li].color);
+		m_phong_shader.set_uniform("normal_matrix", mesh_n_matrix);
+		m_phong_shader.set_uniform("modelview_matrix", mesh_mv_matrix);
+		m_phong_shader.set_uniform("modelview_projection_matrix", mesh_mvp_matrix);
+		m_phong_shader.set_uniform("diffuse_color", mesh_diffuse);
+		m_phong_shader.set_uniform("specular_color", mesh_specular);
+		//m_mesh->draw(); 
         m_shadowMap->unbind();
 
         // All other shaders should overwrite the framebuffer color, not add to it...
