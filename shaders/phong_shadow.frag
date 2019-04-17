@@ -44,36 +44,28 @@ void main()
     * instead of additive tolerance: compare the fragment's distance to 1.01x the
     * distance from the shadow map.
     ***/
-    
     vec3 color = vec3(0.0f);
-	 
-	// compare distance from frag to light (v2f_ec_vertex; but maybe change from eye space) 
-	// against distance recorded for light ray in shadow map (texture(shadow_map, direction).r; or texture(shadow_map, light_ray).r)
 
-	vec3 frag_light = v2f_ec_vertex - light_position;
-	float dist1 = sqrt(frag_light[0]*frag_light[0]+frag_light[1]*frag_light[1]+frag_light[2]*frag_light[2]);
-	float dist2 = 1.01 * texture(shadow_map, light_position).r;
+    vec3 l = (light_position-v2f_ec_vertex); // vector from vertex position to light position (eye coordinates)
+    vec3 v = normalize(-v2f_ec_vertex); // eye is in (0,0,0), so the view vector is just - vertex_position
+    float dist = texture(shadow_map, -l).r;
 
-	if (dist1 < dist2){
-	// compute diffuse term and add to color
-	vec3 light = normalize(vec3(light_position) - v2f_ec_vertex); // compute light vector
-	// only illumination when n_l > 0 therefore only compute those
-	float n_l = dot(N, light);
-	if (n_l > 0){
-	color += light_color * diffuse_color * n_l;
-	}
+    // Computing the final color
+    color = 0.2 * light_color;
 
-	// compute specular term and add to color
-	vec3 view = normalize(-v2f_ec_vertex);
-	// only illumination when r_v > 0 therefore only compute those
-	vec3 r = 2 * N * n_l - light; // define r vector
-	float r_v = dot(r, view);
-	if (r_v > 0){
-	color += light_color * specular_color * pow(r_v, shininess);
-	}
+    if((dot(l, normalize(l)))<=(dist*1.01)){ // Phong shading if not in shadow : norm(light vector) < dist shadow map
+        float n_l = dot(N, normalize(l));
+        if(n_l>0){
+            color += light_color * diffuse_color * n_l;
 
-	} 
-
+            vec3 r = (2 * N) * n_l - normalize(l);
+		    float r_v = dot(r, v);
+            if(r_v>0){
+                color += light_color * specular_color * pow(r_v, shininess);
+            }
+        }
+    }
+    
     // append the required alpha value
     f_light_contribution = vec4(color, 1.0);
 }
